@@ -1,0 +1,36 @@
+
+stakeholders (main user jo hmari app ko use krenge)
+1.Admin
+2.User
+
+Admin Functionalities
+1.Categories CRUD
+2.Subcategories CRUD
+3.Can see all events
+4.Can see all Users
+5.Can see all Communities
+6.Can see analytics of the App
+
+
+User Functionalities / WEB AND APP
+1. SignUp / Login
+2. user can explore events accordinf to location
+3. user can join that events
+4. User and Event Creators can do comments and Posts related to the Event.
+
+
+Technologies
+
+
+Frontend / Backend
+Next.js
+
+Database
+MongoDB
+
+CSS , Tailwind
+Library , Shadcn
+
+
+API Testing
+thunder client , POSTMan  (koi ek krskte hen)
