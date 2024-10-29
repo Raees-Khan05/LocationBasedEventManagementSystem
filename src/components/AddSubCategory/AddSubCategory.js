@@ -56,7 +56,7 @@ export function AddSubCategory() {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Sub Category</DrawerTitle>
+          <DrawerTitle>Add Suub Category</DrawerTitle>
           <DrawerDescription>
             Make changes to your profile here. Click save when you are done.
           </DrawerDescription>

@@ -34,7 +34,7 @@ export function AddCategory() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Edit Profile</Button>
+          <Button variant="outline">Add Category</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -56,7 +56,7 @@ export function AddCategory() {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
+          <DrawerTitle>Add Category</DrawerTitle>
           <DrawerDescription>
             Make changes to your profile here. Click save when you are done.
           </DrawerDescription>
