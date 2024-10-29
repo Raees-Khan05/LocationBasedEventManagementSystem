@@ -14,10 +14,7 @@ export async function GET(request) {
         }
         
         const subCategories = await SubCategoryModel.find(query).populate("category" , "title");
-    // const SubCategories = await SubCategoryModel.find(query).populate(
-    //     "category",
-    //     "title"
-    // );
+    
     return Response.json(
         {
             msg : "Subcategories Fetched SuccessFully",
@@ -43,5 +40,13 @@ export async function POST(request) {
         {status : 201}
     );
 
+    
+}
+
+export async function PUT(request) {
+    
+}
+
+export async function DELETE(request) {
     
 }
