@@ -3,9 +3,9 @@ const {Schema} = mongoose;
 
 
     const categorySchema = new Schema({
-        title : String,
-        description: String,
-        thumbnail : String,
+        title : {type : String , required : true},
+        description: {type : String , required : true},
+        thumbnail : {type : String , required : true},
     })
     
-    export const CategoryModel = mongoose.model('Categories' , categorySchema);
+    export const CategoryModel = mongoose.models.Categories || mongoose.model('Categories' , categorySchema);
