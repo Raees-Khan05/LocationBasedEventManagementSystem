@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
+const categorySchema = new Schema({
+  title: {type : String  , required : true},
+  description: { type: String, required: true },
+  thumbnail: { type: String, required: true },
+});
 
-    const categorySchema = new Schema({
-        title : {type : String , required : true},
-        description: {type : String , required : true},
-        thumbnail : {type : String , required : true},
-    })
-    
-    export const CategoryModel = mongoose.models.Categories || mongoose.model('Categories' , categorySchema);
+export const CategoryModal = mongoose.models.Categories || mongoose.model("Categories", categorySchema);

@@ -2,7 +2,6 @@ import connectDB from "@/lib/db/connectDB";
 import { SubCategoryModel } from "@/lib/models/subCategories";
 
 
-
 export async function GET(request) {
     await connectDB();
     const reqUrl = request.url;

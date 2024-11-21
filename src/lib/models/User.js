@@ -12,7 +12,10 @@ const {Schema} = mongoose;
         },
         profileImage : String,
         address : String,
-        bio : String
+        bio : String,
+        role : {type : String , default : "user",
+            enum: ["admin" , "user"]
+        }
     })
     
     export const UserModel = mongoose.models.Users || mongoose.model('Users' , userSchema);

@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from 'next/image'
+import { getUsers } from '@/actions/users'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const users = [
   {
@@ -34,7 +36,8 @@ const users = [
   },
 ]
 
-const Users = () => {
+const Users = async () => {
+  const users = await getUsers()
   return (
     <div className='min-h-screen'>
 <Table>
@@ -49,10 +52,14 @@ const Users = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {users.map((user) => (
+        {users?.users?.map((user) => (
           <TableRow key={user.fullName}>
             <TableCell className="text-right">
-              <Image alt={'user'} src={user.profileImage} height={40} width={40} className='rounded-md'/>
+            <Avatar>
+                 <AvatarImage height={40} width={40} src={user.profileImg} />
+                  <AvatarFallback>-</AvatarFallback>
+                 </Avatar>
+              {/* <Image alt={'user'} src={user.profileImage} height={40} width={40} className='rounded-md'/> */}
             </TableCell>
             <TableCell className="font-medium">{user.fullName}</TableCell>
             <TableCell className="font-medium">{user.email}</TableCell>

@@ -1,10 +1,9 @@
-"use client"
-
-import * as React from "react"
-
-import { cn } from "@/lib/utils"
-// import { useMediaQuery } from "@/hooks/use-media-query"
-import { Button } from "@/components/ui/button"
+"use client";
+import React, { useRef, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+// import { useMediaQuery } from "@/hooks/use-media-query";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -22,13 +21,15 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/drawer";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { uploadImage } from "@/actions/upload";
+import { addCategory } from "@/actions/categories";
 
 export function AddCategory() {
-  const [open, setOpen] = React.useState(false)
-  const isDesktop = true
+  const [open, setOpen] = useState(false);
+  const isDesktop = true;
 
   if (isDesktop) {
     return (
@@ -40,25 +41,26 @@ export function AddCategory() {
           <DialogHeader>
             <DialogTitle>Add Category</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you are done.
+              Make changes to your profile here. Click save when {`you're`}{" "}
+              done.
             </DialogDescription>
           </DialogHeader>
           <ProfileForm />
         </DialogContent>
       </Dialog>
-    )
+    );
   }
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Add Category</Button>
+        <Button variant="outline">Edit Profile</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Category</DrawerTitle>
+          <DrawerTitle>Edit profile</DrawerTitle>
           <DrawerDescription>
-            Make changes to your profile here. Click save when you are done.
+            Make changes to your profile here. Click save when done.
           </DrawerDescription>
         </DrawerHeader>
         <ProfileForm className="px-4" />
@@ -69,21 +71,62 @@ export function AddCategory() {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }
 
 function ProfileForm({ className }) {
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef();
+  const { toast } = useToast();
+  
+  const handleAddCategory = async (formData) => {
+    console.log("formData=>", formData);
+    setLoading(true);
+    let uploadLink = await uploadImage(formData);
+    const obj = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      thumbnail: uploadLink,
+    };
+    await addCategory(obj);
+    toast({
+      title: "Category added successfully",
+    });
+    formRef?.current?.reset();
+    setLoading(false);
+  };
   return (
-    <form className={cn("grid items-start gap-4", className)}>
+    <form
+      ref={formRef}
+      action={handleAddCategory}
+      className={cn("grid items-start gap-4", className)}
+    >
       <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+        <Label htmlFor="title">Title</Label>
+        <Input
+          required
+          name="title"
+          type="title"
+          id="title"
+          placeholder="Sports"
+        />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@shadcn" />
+        <Label htmlFor="description">Description</Label>
+        <Input
+          required
+          name="description"
+          id="description"
+          placeholder="About Category"
+        />
       </div>
-      <Button type="submit">Save changes</Button>
+      <div className="grid gap-2">
+        <Label htmlFor="thumbnail">Thumbnail</Label>
+        <Input required name="thumbnail" type="file" />
+      </div>
+      <Button disabled={loading} type="submit">
+        {loading ? "Loading..." : "Add Category"}
+      </Button>
     </form>
-  )
+  );
 }

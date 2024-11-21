@@ -1,9 +1,16 @@
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from 'next/link'
+import { auth } from '../../../../auth'
+import { redirect } from 'next/navigation'
 
 
-const layout = ({children}) => {
+const layout = async ({children}) => {
+  const session = await auth();
+  console.log("session" , session);
+
+  if(!session) redirect('/signin')
+  
   return (
     <html>
         <body>
