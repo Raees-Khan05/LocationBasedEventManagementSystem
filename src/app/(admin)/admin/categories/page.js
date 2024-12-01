@@ -41,7 +41,7 @@ const Categories = async () => {
         {categories?.categories?.map((category) => (
           <TableRow key={category.title}>
             <TableCell className="text-right">
-              <Image alt={'user'} src={category.thubmnail} height={40} width={40} className='rounded-md'/>
+              <img alt={'user'} src={category.thubmnail} height={40} width={40} className='rounded-md'/>
             </TableCell>
             <TableCell className="font-medium">{category.title}</TableCell>
             <TableCell >{category.description}</TableCell>

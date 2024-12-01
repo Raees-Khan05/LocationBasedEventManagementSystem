@@ -1,27 +1,35 @@
-import Image from "next/image";
-import { auth, signOut } from "../../auth";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 
-export default async function Home() {
-        const session = await auth();
+import UpcomingEvents from '@/components/UpcomingEvents/UpcomingEvents'
+import { auth } from '../../auth'
+import { getEvents } from '@/actions/events';
+import { getCategories } from '@/actions/categories';
+
+
+
+export default async function HomePage() {
+  const session = await auth();
+  const { events } = await getEvents();
+  const { categories } = await getCategories();
+
+
   return (
-    <div className="min-h-screen">
-     <h1 className='font-bold text-2xl text-center pt-10'>Find Your Friend</h1>
-     {
-      session ?   <form className="flex justify-center items-center pt-10" action={async ()=> {
-        "use server";
-        await signOut();
-       }}>
-        <Button type="submit">SignOut</Button>
-       </form> : 
-       <Link href={'/signin'}>
-        <Button>SignOut</Button>
-       
-       </Link>
-     }
-   
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+      <header className="p-4 bg-background/80 backdrop-blur-sm border-b sticky top-0 z-10">
+        <nav className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-primary">Find Your Friend</h1>
+          <ul className="flex space-x-4">
+            <li><a href="#" className="hover:text-primary transition-colors">Home</a></li>
+            <li><a href="#" className="hover:text-primary transition-colors">Events</a></li>
+            <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
+            <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+
+      <UpcomingEvents events={events} categories={categories}/>
     </div>
-  );
+  )
 }
+

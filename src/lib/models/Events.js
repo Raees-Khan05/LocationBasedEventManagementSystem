@@ -8,7 +8,7 @@ const eventSchema = new Schema({
   endTime: String,
   thumbnail : String,
   startDate: String,
-  endDate: String,
+  endDate: String,  
   location: {
     lat: Number,
     long: Number,
@@ -20,5 +20,4 @@ const eventSchema = new Schema({
   going: [{ type: mongoose.Types.ObjectId, ref: "Users" }],
 });
 
-export const EventModal =
-  mongoose.models.Events || mongoose.model("Events", eventSchema);
+export const EventModal = mongoose.models.Events || mongoose.model("Events", eventSchema);

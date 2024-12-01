@@ -4,7 +4,11 @@ const nextConfig = {
         remotePatterns : [
             {hostname : "images.unsplash.com"},
             {hostname : "res.cloudinary.com"},
-            {hostname : "lh3.googleusercontent.com"}
+            {hostname : "lh3.googleusercontent.com"},
+            {
+                protocol: "https",
+                hostname: "www.huaweicentral.com", // Added the required domain
+              },
         ]
     }
 };
